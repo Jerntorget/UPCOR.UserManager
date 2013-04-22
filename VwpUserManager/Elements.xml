@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/" >
+  <Module Name="VwpUserManager" List="113" Url="_catalogs/wp">
+    <File Path="VwpUserManager\VwpUserManager.webpart" Url="UPCOR.UserManager_VwpUserManager.webpart" Type="GhostableInLibrary" >
+      <Property Name="Group" Value="Custom" />
+    </File>
+  </Module>
+</Elements>

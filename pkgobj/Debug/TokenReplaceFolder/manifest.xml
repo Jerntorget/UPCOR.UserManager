@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="78a846aa-f303-4e99-98a7-3435fdb79f96" SharePointProductVersion="15.0">
+  <Assemblies>
+    <Assembly Location="UPCOR.UserManager.dll" DeploymentTarget="GlobalAssemblyCache">
+      <SafeControls>
+        <SafeControl Assembly="UPCOR.UserManager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=88adaf4f384e4a8e" Namespace="UPCOR.UserManager.UserManagerWebPart" TypeName="*" />
+      </SafeControls>
+    </Assembly>
+  </Assemblies>
+  <TemplateFiles>
+    <TemplateFile Location="Layouts\UPCOR.UserManager\code.js" />
+    <TemplateFile Location="Layouts\UPCOR.UserManager\style.css" />
+    <TemplateFile Location="Layouts\UPCOR.UserManager\umservice.asmx" />
+  </TemplateFiles>
+  <FeatureManifests>
+    <FeatureManifest Location="UPCOR.UserManager_UserManagerFeature\Feature.xml" />
+  </FeatureManifests>
+</Solution>

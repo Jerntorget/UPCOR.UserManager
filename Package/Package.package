@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="78a846aa-f303-4e99-98a7-3435fdb79f96" solutionId="78a846aa-f303-4e99-98a7-3435fdb79f96" resetWebServer="false" sharePointProductVersion="15.0" name="UPCOR.UserManager" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="4ed519e7-b9c0-4b46-bed9-1484339695a9" />
+  </features>
+  <projectItems>
+    <projectItemReference itemId="eb3ecdaf-40a4-451a-95a7-3c7a7716b6f0" />
+  </projectItems>
+</package>

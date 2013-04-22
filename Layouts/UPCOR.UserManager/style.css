@@ -1,0 +1,12 @@
+﻿.um-panel label {
+    display: inline-block;
+    width: 130px;
+}
+
+.um-panel select {
+    width: 120px;
+}
+
+.um-panel .um-error {
+    color: #f00;
+}
