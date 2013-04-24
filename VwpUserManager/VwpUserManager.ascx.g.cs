@@ -430,9 +430,19 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             global::System.Web.UI.WebControls.Panel @__ctrl19;
             @__ctrl19 = this.@__BuildControl__control3();
             @__parser.AddParsedSubObject(@__ctrl19);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            <button id=\"idBtnSave\" class=\"um-btnsave" +
-                        "\">Spara</button>\r\n        </p>\r\n    </div>\r\n    <div class=\"um-search-result\"></" +
-                        "div>\r\n    <div style=\"clear: both;\"></div>\r\n"));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl(@"
+        </p>
+        <p>
+            <button id=""idBtnSave"" class=""um-btnsave"">Spara</button>
+            <button id=""idBtnCancel"" class=""um-btncancel"">Avbryt</button>
+        </p>
+    </div>
+    <div class=""um-search-result"">
+        <h2>Liknande användare</h2>
+        <div></div>
+    </div>
+    <div style=""clear: both;""></div>
+"));
             return @__ctrl;
         }
         

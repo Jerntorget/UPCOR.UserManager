@@ -31,10 +31,12 @@ namespace UPCOR.UserManager
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public Dictionary<string, string>[] Search(string countyName, string[] properties, string filter) {
+        public Dictionary<string, string>[] Search(string countyName, string filter) {
             string cn = HttpUtility.UrlKeyValueDecode(countyName);
             AdManager adm = new AdManager(cn);
-            return adm.Search(properties, filter);
+            return adm.Search(AdManager.UserProperties,
+                String.Format("(&(objectClass=user)({0}))", 
+                HttpUtility.UrlKeyValueDecode(filter)));
         }
         
         /*

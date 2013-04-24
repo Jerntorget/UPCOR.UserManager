@@ -18,8 +18,26 @@ div.um-panel div.um-user-manager {
 div.um-panel div.um-search-result {
     float: left;
     margin-left: 20px;
-    width: 400px;
+    width: 600px;
     height: 400px;
-    overflow: scroll;
-    border: 1px solid red;
+    overflow: hidden;
 }
+
+span.um-error {
+    font-weight: bold;
+    color: red;
+}
+
+a.um-user-item {
+    display: block;
+    text-decoration: none;
+}
+
+    a.um-user-item span {
+        display: inline-block;
+        padding: 2px;
+    }
+
+    a.um-user-item span.um-col-name {
+        font-weight: bold;
+    }

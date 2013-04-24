@@ -57,8 +57,12 @@
         </p>
         <p>
             <button id="idBtnSave" class="um-btnsave">Spara</button>
+            <button id="idBtnCancel" class="um-btncancel">Avbryt</button>
         </p>
     </div>
-    <div class="um-search-result"></div>
+    <div class="um-search-result">
+        <h2>Liknande användare</h2>
+        <div></div>
+    </div>
     <div style="clear: both;"></div>
 </asp:Panel>
