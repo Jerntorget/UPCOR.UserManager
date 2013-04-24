@@ -53,6 +53,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.SharePoint" />
@@ -71,6 +75,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="key.snk" />
     <None Include="Layouts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{eb3ecdaf-40a4-451a-95a7-3c7a7716b6f0}</SharePointProjectItemId>
@@ -115,12 +120,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="UPCOR.System\UPCOR.System.csproj">
+    <ProjectReference Include="UPCOR.System\UPCOR.Core.csproj">
       <Project>{ca3d3a8d-5be0-469e-b790-8c77175d5d66}</Project>
-      <Name>UPCOR.System</Name>
+      <Name>UPCOR.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

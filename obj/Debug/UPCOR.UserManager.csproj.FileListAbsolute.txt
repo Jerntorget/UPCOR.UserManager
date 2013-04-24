@@ -13,5 +13,4 @@ C:\Users\Administrator\Documents\Visual Studio 2012\Projects\UPCOR.UserManager\o
 C:\Users\Administrator\Documents\Visual Studio 2012\Projects\UPCOR.UserManager\obj\Debug\UPCOR.UserManager.pdb
 C:\Users\Administrator.UPCOR\documents\visual studio 2012\Projects\UPCOR.UserManager\obj\Debug\UPCOR.UserManager.csprojResolveAssemblyReference.cache
 C:\Users\Administrator.UPCOR\documents\visual studio 2012\Projects\UPCOR.UserManager\bin\Debug\Layouts\UPCOR.UserManager\umservice.asmx
-C:\Users\Administrator.UPCOR\documents\visual studio 2012\Projects\UPCOR.UserManager\bin\Debug\UPCOR.System.dll
-C:\Users\Administrator.UPCOR\documents\visual studio 2012\Projects\UPCOR.UserManager\bin\Debug\UPCOR.System.pdb
+C:\Users\Administrator.UPCOR\documents\visual studio 2012\Projects\UPCOR.UserManager\bin\Debug\UPCOR.UserManager.dll.config

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UPCOR.UserManager", "UPCOR.UserManager.csproj", "{B1CB718F-3F83-4310-ABC3-7730576E68D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UPCOR.System", "UPCOR.System\UPCOR.System.csproj", "{CA3D3A8D-5BE0-469E-B790-8C77175D5D66}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UPCOR.Core", "UPCOR.System\UPCOR.Core.csproj", "{CA3D3A8D-5BE0-469E-B790-8C77175D5D66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

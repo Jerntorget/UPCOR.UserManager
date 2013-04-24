@@ -50,9 +50,13 @@ namespace UPCOR.UserManager.UserManagerWebPart {
         
         protected global::System.Web.UI.WebControls.DropDownList idOrganization;
         
-        protected global::System.Web.UI.WebControls.Label idLblName;
+        protected global::System.Web.UI.WebControls.Label idLblGiveName;
         
-        protected global::System.Web.UI.WebControls.TextBox idName;
+        protected global::System.Web.UI.WebControls.TextBox idGivenName;
+        
+        protected global::System.Web.UI.WebControls.Label idLblSurName;
+        
+        protected global::System.Web.UI.WebControls.TextBox idSurName;
         
         protected global::System.Web.UI.WebControls.Label idLblEmail;
         
@@ -143,28 +147,55 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             this.idOrganization = @__ctrl;
             @__ctrl.ApplyStyleSheetSkin(this.Page);
             @__ctrl.ID = "idOrganization";
+            @__ctrl.CssClass = "um-organization";
             return @__ctrl;
         }
         
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-        private global::System.Web.UI.WebControls.Label @__BuildControlidLblName() {
+        private global::System.Web.UI.WebControls.Label @__BuildControlidLblGiveName() {
             global::System.Web.UI.WebControls.Label @__ctrl;
             @__ctrl = new global::System.Web.UI.WebControls.Label();
-            this.idLblName = @__ctrl;
+            this.idLblGiveName = @__ctrl;
             @__ctrl.ApplyStyleSheetSkin(this.Page);
-            @__ctrl.ID = "idLblName";
-            @__ctrl.AssociatedControlID = "idName";
-            @__ctrl.Text = "Name:";
+            @__ctrl.ID = "idLblGiveName";
+            @__ctrl.AssociatedControlID = "idGivenName";
+            @__ctrl.Text = "Förnamn:";
             return @__ctrl;
         }
         
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-        private global::System.Web.UI.WebControls.TextBox @__BuildControlidName() {
+        private global::System.Web.UI.WebControls.TextBox @__BuildControlidGivenName() {
             global::System.Web.UI.WebControls.TextBox @__ctrl;
             @__ctrl = new global::System.Web.UI.WebControls.TextBox();
-            this.idName = @__ctrl;
+            this.idGivenName = @__ctrl;
             @__ctrl.ApplyStyleSheetSkin(this.Page);
-            @__ctrl.ID = "idName";
+            @__ctrl.ID = "idGivenName";
+            @__ctrl.CssClass = "um-givenname";
+            @__ctrl.MaxLength = 50;
+            return @__ctrl;
+        }
+        
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        private global::System.Web.UI.WebControls.Label @__BuildControlidLblSurName() {
+            global::System.Web.UI.WebControls.Label @__ctrl;
+            @__ctrl = new global::System.Web.UI.WebControls.Label();
+            this.idLblSurName = @__ctrl;
+            @__ctrl.ApplyStyleSheetSkin(this.Page);
+            @__ctrl.ID = "idLblSurName";
+            @__ctrl.AssociatedControlID = "idSurName";
+            @__ctrl.Text = "Efternamn:";
+            return @__ctrl;
+        }
+        
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        private global::System.Web.UI.WebControls.TextBox @__BuildControlidSurName() {
+            global::System.Web.UI.WebControls.TextBox @__ctrl;
+            @__ctrl = new global::System.Web.UI.WebControls.TextBox();
+            this.idSurName = @__ctrl;
+            @__ctrl.ApplyStyleSheetSkin(this.Page);
+            @__ctrl.ID = "idSurName";
+            @__ctrl.CssClass = "um-surname";
+            @__ctrl.MaxLength = 50;
             return @__ctrl;
         }
         
@@ -187,7 +218,8 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             this.idEmail = @__ctrl;
             @__ctrl.ApplyStyleSheetSkin(this.Page);
             @__ctrl.ID = "idEmail";
-            @__ctrl.TextMode = global::System.Web.UI.WebControls.TextBoxMode.Email;
+            @__ctrl.CssClass = "um-email";
+            @__ctrl.MaxLength = 50;
             return @__ctrl;
         }
         
@@ -211,6 +243,7 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             @__ctrl.ApplyStyleSheetSkin(this.Page);
             @__ctrl.ID = "idUsername";
             @__ctrl.CssClass = "um-username";
+            @__ctrl.MaxLength = 20;
             return @__ctrl;
         }
         
@@ -234,6 +267,8 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             @__ctrl.ApplyStyleSheetSkin(this.Page);
             @__ctrl.ID = "idPassword1";
             @__ctrl.TextMode = global::System.Web.UI.WebControls.TextBoxMode.Password;
+            @__ctrl.CssClass = "um-password1";
+            @__ctrl.MaxLength = 20;
             return @__ctrl;
         }
         
@@ -257,6 +292,8 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             @__ctrl.ApplyStyleSheetSkin(this.Page);
             @__ctrl.ID = "idPassword2";
             @__ctrl.TextMode = global::System.Web.UI.WebControls.TextBoxMode.Password;
+            @__ctrl.CssClass = "um-password2";
+            @__ctrl.MaxLength = 20;
             return @__ctrl;
         }
         
@@ -279,7 +316,8 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             this.idSendto = @__ctrl;
             @__ctrl.ApplyStyleSheetSkin(this.Page);
             @__ctrl.ID = "idSendto";
-            @__ctrl.TextMode = global::System.Web.UI.WebControls.TextBoxMode.Email;
+            @__ctrl.CssClass = "um-sendto";
+            @__ctrl.MaxLength = 50;
             return @__ctrl;
         }
         
@@ -300,11 +338,11 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             @__ctrl = new global::System.Web.UI.WebControls.Panel();
             @__ctrl.ApplyStyleSheetSkin(this.Page);
             System.Web.UI.IParserAccessor @__parser = ((System.Web.UI.IParserAccessor)(@__ctrl));
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n            "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n                "));
             global::System.Web.UI.WebControls.Label @__ctrl1;
             @__ctrl1 = this.@__BuildControlidLblGroups();
             @__parser.AddParsedSubObject(@__ctrl1);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n            "));
             return @__ctrl;
         }
         
@@ -315,75 +353,86 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             @__ctrl.ApplyStyleSheetSkin(this.Page);
             @__ctrl.CssClass = "um-panel";
             System.Web.UI.IParserAccessor @__parser = ((System.Web.UI.IParserAccessor)(@__ctrl));
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n    <p>\r\n        <!-- store info here -->\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n    <div class=\"um-user-manager\">\r\n        <p>\r\n            <!-- store info her" +
+                        "e -->\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl1;
             @__ctrl1 = this.@__BuildControlidStore();
             @__parser.AddParsedSubObject(@__ctrl1);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        <!-- Error info -->\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n            <!-- Error info -->\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl2;
             @__ctrl2 = this.@__BuildControlidErrorText();
             @__parser.AddParsedSubObject(@__ctrl2);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n    </p>\r\n    <p>\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl3;
             @__ctrl3 = this.@__BuildControlidLblOrganization();
             @__parser.AddParsedSubObject(@__ctrl3);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n            "));
             global::System.Web.UI.WebControls.DropDownList @__ctrl4;
             @__ctrl4 = this.@__BuildControlidOrganization();
             @__parser.AddParsedSubObject(@__ctrl4);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n    </p>\r\n    <p>\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl5;
-            @__ctrl5 = this.@__BuildControlidLblName();
+            @__ctrl5 = this.@__BuildControlidLblGiveName();
             @__parser.AddParsedSubObject(@__ctrl5);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n            "));
             global::System.Web.UI.WebControls.TextBox @__ctrl6;
-            @__ctrl6 = this.@__BuildControlidName();
+            @__ctrl6 = this.@__BuildControlidGivenName();
             @__parser.AddParsedSubObject(@__ctrl6);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n    </p>\r\n    <p>\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl7;
-            @__ctrl7 = this.@__BuildControlidLblEmail();
+            @__ctrl7 = this.@__BuildControlidLblSurName();
             @__parser.AddParsedSubObject(@__ctrl7);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n            "));
             global::System.Web.UI.WebControls.TextBox @__ctrl8;
-            @__ctrl8 = this.@__BuildControlidEmail();
+            @__ctrl8 = this.@__BuildControlidSurName();
             @__parser.AddParsedSubObject(@__ctrl8);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n    </p>\r\n    <p>\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl9;
-            @__ctrl9 = this.@__BuildControlidLblUsername();
+            @__ctrl9 = this.@__BuildControlidLblEmail();
             @__parser.AddParsedSubObject(@__ctrl9);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n            "));
             global::System.Web.UI.WebControls.TextBox @__ctrl10;
-            @__ctrl10 = this.@__BuildControlidUsername();
+            @__ctrl10 = this.@__BuildControlidEmail();
             @__parser.AddParsedSubObject(@__ctrl10);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n    </p>\r\n    <p>\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl11;
-            @__ctrl11 = this.@__BuildControlidLblPassword1();
+            @__ctrl11 = this.@__BuildControlidLblUsername();
             @__parser.AddParsedSubObject(@__ctrl11);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n            "));
             global::System.Web.UI.WebControls.TextBox @__ctrl12;
-            @__ctrl12 = this.@__BuildControlidPassword1();
+            @__ctrl12 = this.@__BuildControlidUsername();
             @__parser.AddParsedSubObject(@__ctrl12);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n    </p>\r\n    <p>\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl13;
-            @__ctrl13 = this.@__BuildControlidLblPassword2();
+            @__ctrl13 = this.@__BuildControlidLblPassword1();
             @__parser.AddParsedSubObject(@__ctrl13);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n            "));
             global::System.Web.UI.WebControls.TextBox @__ctrl14;
-            @__ctrl14 = this.@__BuildControlidPassword2();
+            @__ctrl14 = this.@__BuildControlidPassword1();
             @__parser.AddParsedSubObject(@__ctrl14);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n    </p>\r\n    <p>\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl15;
-            @__ctrl15 = this.@__BuildControlidLblSendto();
+            @__ctrl15 = this.@__BuildControlidLblPassword2();
             @__parser.AddParsedSubObject(@__ctrl15);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n            "));
             global::System.Web.UI.WebControls.TextBox @__ctrl16;
-            @__ctrl16 = this.@__BuildControlidSendto();
+            @__ctrl16 = this.@__BuildControlidPassword2();
             @__parser.AddParsedSubObject(@__ctrl16);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n    </p>\r\n    <p>\r\n        "));
-            global::System.Web.UI.WebControls.Panel @__ctrl17;
-            @__ctrl17 = this.@__BuildControl__control3();
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
+            global::System.Web.UI.WebControls.Label @__ctrl17;
+            @__ctrl17 = this.@__BuildControlidLblSendto();
             @__parser.AddParsedSubObject(@__ctrl17);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n    </p>\r\n"));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n            "));
+            global::System.Web.UI.WebControls.TextBox @__ctrl18;
+            @__ctrl18 = this.@__BuildControlidSendto();
+            @__parser.AddParsedSubObject(@__ctrl18);
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
+            global::System.Web.UI.WebControls.Panel @__ctrl19;
+            @__ctrl19 = this.@__BuildControl__control3();
+            @__parser.AddParsedSubObject(@__ctrl19);
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            <button id=\"idBtnSave\" class=\"um-btnsave" +
+                        "\">Spara</button>\r\n        </p>\r\n    </div>\r\n    <div class=\"um-search-result\"></" +
+                        "div>\r\n    <div style=\"clear: both;\"></div>\r\n"));
             return @__ctrl;
         }
         

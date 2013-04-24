@@ -5,6 +5,8 @@ using Microsoft.SharePoint.Client;
 using System.Net;
 using System.Collections.Generic;
 using Microsoft.SharePoint.Client.Utilities;
+using System.Web.UI;
+using UPCOR.Core;
 
 namespace UPCOR.UserManager.UserManagerWebPart
 {
@@ -107,7 +109,7 @@ namespace UPCOR.UserManager.UserManagerWebPart
             {
                 var attrs = new string[][] {
                     new string[] { "weburl", this.WebUrlToUse },
-                    new string[] { "countyName", HttpUtility.UrlKeyValueEncode(String.IsNullOrEmpty(this.CountyName) ? "" : this.CountyName) },
+                    new string[] { "county_name", HttpUtility.UrlKeyValueEncode(String.IsNullOrEmpty(this.CountyName) ? "" : this.CountyName) },
                 };
                 
                 for(int i=0;i<attrs.Length;i++){
