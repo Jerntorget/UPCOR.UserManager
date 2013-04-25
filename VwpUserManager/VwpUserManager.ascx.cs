@@ -22,8 +22,7 @@ namespace UPCOR.UserManager.UserManagerWebPart
         WebDescription("Url att använda."),
         Personalizable(PersonalizationScope.Shared),
         Category("Inställningar")]
-        public string WebUrlToUse
-        {
+        public string WebUrlToUse {
             get;
             set;
         }
@@ -37,8 +36,7 @@ namespace UPCOR.UserManager.UserManagerWebPart
         WebDescription("Namn på listan som ska användas."),
         Personalizable(PersonalizationScope.Shared),
         Category("Inställningar")]
-        public string ListName
-        {
+        public string ListName {
             get;
             set;
         }
@@ -90,51 +88,71 @@ namespace UPCOR.UserManager.UserManagerWebPart
         // for production. Because the SecurityPermission attribute bypasses the security check for callers of
         // your constructor, it's not recommended for production purposes.
         // [System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Assert, UnmanagedCode = true)]
-        public UserManagerWebPart()
-        {
+        public UserManagerWebPart() {
         }
 
-        protected override void OnInit(EventArgs e)
-        {
+        protected override void OnInit(EventArgs e) {
             base.OnInit(e);
             InitializeControl();
         }
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        protected void Page_Load(object sender, EventArgs e) {
             /*
              * Get site from this.WebUrlToUse
              * */
-            if (this.WebUrlToUse != null && this.ListName != null && this.ColumnOrganizationId != null && this.ColumnOrganizationName != null)
-            {
+            if (this.WebUrlToUse != null && this.ListName != null && this.ColumnOrganizationId != null && this.ColumnOrganizationName != null) {
                 var attrs = new string[][] {
                     new string[] { "weburl", this.WebUrlToUse },
                     new string[] { "county_name", HttpUtility.UrlKeyValueEncode(String.IsNullOrEmpty(this.CountyName) ? "" : this.CountyName) },
                 };
-                
-                for(int i=0;i<attrs.Length;i++){
+
+                /*
+                 * Store some attributes to be used in javascript
+                 * */
+                for (int i = 0; i < attrs.Length; i++) {
                     idStore.Attributes.Add(attrs[i][0], attrs[i][1]);
                 }
 
+                /*
+                 * Load the essential things from sharepoint
+                 * */
                 ClientContext context = new ClientContext(this.WebUrlToUse);
                 context.Credentials = new NetworkCredential("administrator", "j3rnt0rge7%", "SAFE4");
                 Web web = context.Web;
+                GroupCollection groups = web.SiteGroups;
+                context.Load(groups, 
+                    gs => gs.Include(
+                        g => g.Title,
+                        g => g.Id));
                 context.Load(web);
                 context.ExecuteQuery();
 
                 /*
+                 * Populate siteGroups
+                 * */
+                idSiteGroups.DataSource = groups;
+                idSiteGroups.DataTextField = "Title";
+                idSiteGroups.DataValueField = "Id";
+                idSiteGroups.DataBind();
+
+                /*
                  * Get list from this.ListName
-                 * 
                  * */
                 List list = context.Web.Lists.GetByTitle(this.ListName);
                 CamlQuery cq = CamlQuery.CreateAllItemsQuery();
                 ListItemCollection items = list.GetItems(cq);
-                context.Load(items);
+                context.Load(items,
+                    its => its.Include(
+                        it => it[this.ColumnOrganizationId],
+                        it => it[this.ColumnOrganizationName]));
                 context.ExecuteQuery();
 
                 var dict = new Dictionary<String, String>();
                 dict.Add(String.IsNullOrEmpty(this.CountyName) ? "-- inställningar saknas --" : this.CountyName, "0");
 
+                /*
+                 * Populate organizations
+                 * */
                 try {
                     foreach (ListItem item in items) {
                         dict.Add(item[this.ColumnOrganizationName].ToString(), item[this.ColumnOrganizationId].ToString());
@@ -143,7 +161,8 @@ namespace UPCOR.UserManager.UserManagerWebPart
                     idOrganization.DataValueField = "Value";
                     idOrganization.DataTextField = "Key";
                     idOrganization.DataBind();
-                } catch (Exception ex) {
+                }
+                catch (Exception ex) {
                     idErrorText.Text = ex.Message;
                 }
             }

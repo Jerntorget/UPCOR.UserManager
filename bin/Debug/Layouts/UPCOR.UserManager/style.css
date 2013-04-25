@@ -4,7 +4,8 @@
 }
 
 div.um-panel select {
-    width: 160px;
+    width: 175px;
+    border: 1px solid rgb(146, 192, 224);
 }
 
 div.um-panel span.um-error {
@@ -40,4 +41,15 @@ a.um-user-item {
 
     a.um-user-item span.um-col-name {
         font-weight: bold;
+    }
+
+div.um-sitegroups {
+    width: 400px;
+    height: 120px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+    div.um-sitegroups label {
+        white-space: nowrap;
     }

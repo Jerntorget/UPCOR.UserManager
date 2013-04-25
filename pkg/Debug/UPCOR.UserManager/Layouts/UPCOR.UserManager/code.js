@@ -1,14 +1,23 @@
 ﻿$(document).ready(function () {
+    /*
+    * Initialize data
+    **/
     var m_store = $('span.um-store');
     var m_countyName = m_store.attr('county_name');
     var m_webUrl = m_store.attr('weburl');
     var m_users = null;
+    var m_canSave = false;
 
     if (m_countyName == "") {
         $('div.um-panel').css('display', 'none')
         .parent().append("<h2>Viktiga Inställningar saknas, välj redigera webbdel.</h2>");
     }
 
+    $('button.btn-save').prop('disabled', true);
+
+    /*
+    * Functions
+    **/
     function fnUmService(method, data, success, error) {
         data["countyName"] = m_countyName;
         $.ajax({
@@ -64,6 +73,7 @@
         $('input.um-surname').val("");
         $('input.um-username').val("").prop('disabled', false);
         $('input.um-email').val("");
+        $('div.um-sitegroups input[type="checkbox"]').prop('checked', false);
         e.preventDefault();
         return false;
     });
@@ -82,16 +92,19 @@
     * EVENT: Check if username exist
     **/
     $('input.um-username').blur(function () {
+        m_canSave = false;
         var input = $(this);
         fnUserExist(input.val(), function (data) {            
             if (data.d) {
-                console.log("true");
+                m_canSave = false;
+                $('button.um-btnsave').prop('disabled', true);
                 $('span.um-error').text("Det finns redan en användare med det här användarnamnet.");
                 input.css({
                     "color": "red"
                 });
             } else {
-                console.log("false");
+                m_canSave = true;
+                $('button.um-btnsave').prop('disabled', false);
                 $('span.um-error').text("");
                 input.css({
                     "color": "black"

@@ -23,32 +23,54 @@ namespace UPCOR.UserManager
     {
         [WebMethod]
         [ScriptMethod(ResponseFormat=ResponseFormat.Json)]
-        public bool UserExist(string countyName, string userName) {
+        public bool Exist(string countyName, string userName) {
             string cn = HttpUtility.UrlKeyValueDecode(countyName);
-            AdUserManager aum = new AdUserManager(cn);
+            AdUserManager aum = new AdUserManager(String.Format("OU={0}",cn));
             return aum.Exist(userName);
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public Dictionary<string, string>[] Search(string countyName, string filter) {
-            string cn = HttpUtility.UrlKeyValueDecode(countyName);
-            AdManager adm = new AdManager(cn);
+            countyName = HttpUtility.UrlKeyValueDecode(countyName);
+            AdManager adm = new AdManager(countyName);
             return adm.Search(AdManager.UserProperties,
                 String.Format("(&(objectClass=user)({0}))", 
                 HttpUtility.UrlKeyValueDecode(filter)));
         }
-        
-        /*
-        public void ColorAdd(string color, bool grandma, bool onlyone) {
-            ClientContext ctx = new ClientContext("http://web1.upcor.se/david/");
-            List l = ctx.Web.Lists.GetById(new Guid("EC7CD8A6-4C98-4301-8F02-FBF58CF0F8D2"));
-            ListItem li = l.AddItem(new ListItemCreationInformation { });
-            li["Title"] = color;
-            li["Mormor"] = grandma;
-            li["EndastEnMormor"] = onlyone;
-            li.Update();
-            ctx.ExecuteQuery();
-        } */
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string Create(string countyName, string orgName, string userName, string password, string givenName, string surName, string email) {
+            countyName = HttpUtility.UrlKeyValueDecode(countyName);
+            orgName = HttpUtility.UrlKeyValueDecode(orgName);
+            userName = HttpUtility.UrlKeyValueDecode(userName);
+            password = HttpUtility.UrlKeyValueDecode(password);
+            givenName = HttpUtility.UrlKeyValueDecode(givenName);
+            surName = HttpUtility.UrlKeyValueDecode(surName);
+            email = HttpUtility.UrlKeyValueDecode(email);
+
+            string error;
+            AdUserManager adum = new AdUserManager(countyName, orgName);
+            adum.Create(String.IsNullOrEmpty(orgName) ? countyName : orgName, userName, password, givenName, surName, email, out error);
+            return error;
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string Update(string countyName, string orgName, string userName, string password, string givenName, string surName, string email) {
+            countyName = HttpUtility.UrlKeyValueDecode(countyName);
+            orgName = HttpUtility.UrlKeyValueDecode(orgName);
+            userName = HttpUtility.UrlKeyValueDecode(userName);
+            password = HttpUtility.UrlKeyValueDecode(password);
+            givenName = HttpUtility.UrlKeyValueDecode(givenName);
+            surName = HttpUtility.UrlKeyValueDecode(surName);
+            email = HttpUtility.UrlKeyValueDecode(email);
+
+            string error;
+            AdUserManager adum = new AdUserManager(countyName, orgName);
+            adum.Update(userName, password, givenName, surName, email, out error);
+            return error;
+        }
     }
 }

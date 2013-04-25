@@ -50,14 +50,15 @@
             <asp:Label ID="idLblSendto" AssociatedControlID="idSendto" runat="server" Text="Skickas till:"></asp:Label>
             <asp:TextBox ID="idSendto" runat="server" CssClass="um-sendto" MaxLength="50"></asp:TextBox>
         </p>
-        <p>
-            <asp:Panel runat="server">
-                <asp:Label ID="idLblGroups" runat="server" Text="Grupper"></asp:Label>
-            </asp:Panel>
-        </p>
+        <div> <!-- siteGroups -->
+            <h3>Lägg till användaren i grupperna:</h3>
+            <div class="um-sitegroups">
+                <asp:CheckBoxList ID="idSiteGroups" runat="server"></asp:CheckBoxList>
+            </div>
+        </div>
         <p>
             <button id="idBtnSave" class="um-btnsave">Spara</button>
-            <button id="idBtnCancel" class="um-btncancel">Avbryt</button>
+            <button id="idBtnCancel" class="um-btncancel">Börja om</button>
         </p>
     </div>
     <div class="um-search-result">

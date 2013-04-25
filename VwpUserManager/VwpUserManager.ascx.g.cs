@@ -78,7 +78,7 @@ namespace UPCOR.UserManager.UserManagerWebPart {
         
         protected global::System.Web.UI.WebControls.TextBox idSendto;
         
-        protected global::System.Web.UI.WebControls.Label idLblGroups;
+        protected global::System.Web.UI.WebControls.CheckBoxList idSiteGroups;
         
         public static implicit operator global::System.Web.UI.TemplateControl(UserManagerWebPart target) 
         {
@@ -322,27 +322,12 @@ namespace UPCOR.UserManager.UserManagerWebPart {
         }
         
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-        private global::System.Web.UI.WebControls.Label @__BuildControlidLblGroups() {
-            global::System.Web.UI.WebControls.Label @__ctrl;
-            @__ctrl = new global::System.Web.UI.WebControls.Label();
-            this.idLblGroups = @__ctrl;
+        private global::System.Web.UI.WebControls.CheckBoxList @__BuildControlidSiteGroups() {
+            global::System.Web.UI.WebControls.CheckBoxList @__ctrl;
+            @__ctrl = new global::System.Web.UI.WebControls.CheckBoxList();
+            this.idSiteGroups = @__ctrl;
             @__ctrl.ApplyStyleSheetSkin(this.Page);
-            @__ctrl.ID = "idLblGroups";
-            @__ctrl.Text = "Grupper";
-            return @__ctrl;
-        }
-        
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-        private global::System.Web.UI.WebControls.Panel @__BuildControl__control3() {
-            global::System.Web.UI.WebControls.Panel @__ctrl;
-            @__ctrl = new global::System.Web.UI.WebControls.Panel();
-            @__ctrl.ApplyStyleSheetSkin(this.Page);
-            System.Web.UI.IParserAccessor @__parser = ((System.Web.UI.IParserAccessor)(@__ctrl));
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n                "));
-            global::System.Web.UI.WebControls.Label @__ctrl1;
-            @__ctrl1 = this.@__BuildControlidLblGroups();
-            @__parser.AddParsedSubObject(@__ctrl1);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n            "));
+            @__ctrl.ID = "idSiteGroups";
             return @__ctrl;
         }
         
@@ -426,15 +411,18 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             global::System.Web.UI.WebControls.TextBox @__ctrl18;
             @__ctrl18 = this.@__BuildControlidSendto();
             @__parser.AddParsedSubObject(@__ctrl18);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
-            global::System.Web.UI.WebControls.Panel @__ctrl19;
-            @__ctrl19 = this.@__BuildControl__control3();
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <div> <!-- siteGroups -->\r\n            <h3>Lägg till anvä" +
+                        "ndaren i grupperna:</h3>\r\n            <div class=\"um-sitegroups\">\r\n             " +
+                        "   "));
+            global::System.Web.UI.WebControls.CheckBoxList @__ctrl19;
+            @__ctrl19 = this.@__BuildControlidSiteGroups();
             @__parser.AddParsedSubObject(@__ctrl19);
             @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl(@"
-        </p>
+            </div>
+        </div>
         <p>
             <button id=""idBtnSave"" class=""um-btnsave"">Spara</button>
-            <button id=""idBtnCancel"" class=""um-btncancel"">Avbryt</button>
+            <button id=""idBtnCancel"" class=""um-btncancel"">Börja om</button>
         </p>
     </div>
     <div class=""um-search-result"">
