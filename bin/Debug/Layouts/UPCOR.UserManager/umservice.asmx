@@ -23,17 +23,19 @@ namespace UPCOR.UserManager
     {
         [WebMethod]
         [ScriptMethod(ResponseFormat=ResponseFormat.Json)]
-        public bool Exist(string countyName, string userName) {
-            string cn = HttpUtility.UrlKeyValueDecode(countyName);
-            AdUserManager aum = new AdUserManager(String.Format("OU={0}",cn));
+        public bool Exist(string countyName, string orgName, string userName) {
+            countyName = HttpUtility.UrlKeyValueDecode(countyName);
+            orgName = HttpUtility.UrlKeyValueDecode(orgName);
+            AdUserManager aum = new AdUserManager(countyName, orgName);
             return aum.Exist(userName);
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public Dictionary<string, string>[] Search(string countyName, string filter) {
+        public Dictionary<string, string>[] Search(string countyName, string orgName, string filter) {
             countyName = HttpUtility.UrlKeyValueDecode(countyName);
-            AdManager adm = new AdManager(countyName);
+            orgName = HttpUtility.UrlKeyValueDecode(orgName);
+            AdManager adm = new AdManager(countyName, orgName);
             return adm.Search(AdManager.UserProperties,
                 String.Format("(&(objectClass=user)({0}))", 
                 HttpUtility.UrlKeyValueDecode(filter)));
@@ -52,20 +54,38 @@ namespace UPCOR.UserManager
 
             string error;
             AdUserManager adum = new AdUserManager(countyName, orgName);
-            adum.CreateUser(String.IsNullOrEmpty(orgName) ? countyName : orgName, userName, password, givenName, surName, email, out error);
+            adum.Create(String.IsNullOrEmpty(orgName) ? countyName : orgName, userName, password, givenName, surName, email, out error);
             return error;
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public bool Update(string countyName, string orgName, string userName, string password, string givenName, string surName, string email) {
+        public string Update(string countyName, string orgName, string userName, string password, string givenName, string surName, string email) {
             countyName = HttpUtility.UrlKeyValueDecode(countyName);
             orgName = HttpUtility.UrlKeyValueDecode(orgName);
             userName = HttpUtility.UrlKeyValueDecode(userName);
             password = HttpUtility.UrlKeyValueDecode(password);
             givenName = HttpUtility.UrlKeyValueDecode(givenName);
             surName = HttpUtility.UrlKeyValueDecode(surName);
-            email = HttpUtility.UrlKeyValueDecode(email);            
+            email = HttpUtility.UrlKeyValueDecode(email);
+
+            string error;
+            AdUserManager adum = new AdUserManager(countyName, orgName);
+            adum.Update(userName, password, givenName, surName, email, out error);
+            return error;
         }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public int[] Groups(string countyName, string orgName, string webUrl, string userName){
+            countyName = HttpUtility.UrlKeyValueDecode(countyName);
+            orgName = HttpUtility.UrlKeyValueDecode(orgName);
+            webUrl = HttpUtility.UrlKeyValueDecode(webUrl);
+            userName = HttpUtility.UrlKeyValueDecode(userName);
+            AdUserManager adum = new AdUserManager(countyName, orgName);
+            string error;
+            return adum.Groups(webUrl, "SAFE4", userName, out error);
+        }
+        
     }
 }

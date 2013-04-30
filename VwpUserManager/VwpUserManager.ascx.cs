@@ -124,7 +124,7 @@ namespace UPCOR.UserManager.UserManagerWebPart
                     gs => gs.Include(
                         g => g.Title,
                         g => g.Id));
-                context.Load(web);
+                context.Load(web, w => w.Title);
                 context.ExecuteQuery();
 
                 /*

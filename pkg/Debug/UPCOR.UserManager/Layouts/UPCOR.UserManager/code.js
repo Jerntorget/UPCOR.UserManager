@@ -19,7 +19,9 @@
     * Functions
     **/
     function fnUmService(method, data, success, error) {
+        data["webUrl"] = m_webUrl;
         data["countyName"] = m_countyName;
+        data["orgName"] = data.orgName == null ? "" : data.orgName;
         $.ajax({
             type: "POST",
             url: "/_layouts/15/upcor.usermanager/umservice.asmx/" + method,
@@ -50,7 +52,7 @@
     }
 
     function fnUserExist(userName, success, error) {
-        fnUmService("UserExist", {
+        fnUmService("Exist", {
             "userName": userName
         },
         success,
