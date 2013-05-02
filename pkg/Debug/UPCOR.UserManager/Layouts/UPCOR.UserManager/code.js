@@ -13,7 +13,7 @@
         .parent().append("<h2>Viktiga Inställningar saknas, välj redigera webbdel.</h2>");
     }
 
-    $('button.btn-save').prop('disabled', true);
+    $('button.btn-save').prop('disabled', true).attr('update', 'false');
 
     /*
     * Functions
@@ -33,7 +33,7 @@
                 console.log(data);
                 console.log(status);
                 if (typeof success === 'function')
-                    success(data, status);
+                    success(data.d, status);
             },
             error: function (xmlRequest) {
                 console.log(xmlRequest);
@@ -59,10 +59,23 @@
         error);
     }
 
+    function fnUserGroups(userName, success, error) {
+        fnUmService("Groups", {
+            "userName": userName
+        },
+        success,
+        error);
+    }
+
     /*
     * EVENT: Save click
     **/
     $('button.um-btnsave').click(function (e) {
+        var b = $(this);
+        if (b.attr('update') == 'true') {
+
+        } else {
+        }
         e.preventDefault();
         return false;
     });
@@ -76,6 +89,7 @@
         $('input.um-username').val("").prop('disabled', false);
         $('input.um-email').val("");
         $('div.um-sitegroups input[type="checkbox"]').prop('checked', false);
+        $('button.um-btnsave').attr('update', 'false');
         e.preventDefault();
         return false;
     });
@@ -83,10 +97,21 @@
     /*
     * EVENT: Search for givenName
     **/
-    $('input.um-givenname').keypress(function () {
-        fnSearch("givenName=" + encodeURIComponent($(this).val()) + "*",
+    $('input.um-givenname, input.um-surname, input.um-email, input.um-username').keypress(function () {
+        var searchOpt = "";
+        var o = $(this);
+        if(o.hasClass('um-givenname'))
+            searchOpt = "givenName";
+        if(o.hasClass('um-surname'))
+            searchOpt = "sn";
+        if (o.hasClass('um-email'))
+            searchOpt = "mail";
+        if (o.hasClass('um-username'))
+            searchOpt = "sAMAccountName";
+
+        fnSearch(searchOpt + "=" + encodeURIComponent(o.val()) + "*",
             function (data, success) {
-                guiDisplayUsers(data.d);
+                guiDisplayUsers(data);
             });
     });
 
@@ -96,8 +121,8 @@
     $('input.um-username').blur(function () {
         m_canSave = false;
         var input = $(this);
-        fnUserExist(input.val(), function (data) {            
-            if (data.d) {
+        fnUserExist(input.val(), function (rd) {            
+            if (rd.boolVal) {
                 m_canSave = false;
                 $('button.um-btnsave').prop('disabled', true);
                 $('span.um-error').text("Det finns redan en användare med det här användarnamnet.");
@@ -118,11 +143,12 @@
     /*
     * GUI: Gui functions
     **/
-    function guiDisplayUsers(users) {
+    function guiDisplayUsers(rd) {
+        console.log("rd", rd);
         var template = '<span class="um-col-name"=>{0}</span><span class="um-col-mail>{1}</span><span class="um-col-path">{2}</span>';
         var div = $('div.um-search-result div').empty();
-        m_users = users;
-        for (var i = 0; i < users.length; i++) {
+        m_users = rd.dicts;
+        for (var i = 0; i < m_users.length; i++) {
             div.append(
                 $('<a href="#" class="um-user-item"></a>')
                 .click(function () {
@@ -132,13 +158,30 @@
                     $('input.um-surname').val(u["sn"]);
                     $('input.um-username').val(u["sAMAccountName"]).prop('disabled', true);
                     $('input.um-email').val(u["mail"]);
+                    $('button.um-btnsave').attr('update', 'true');
+                    fnUserGroups(u["sAMAccountName"], guiSetGroups);
                 })
                 .attr("uid", i)
-                .html(template.replace("{0}", users[i]["name"])
-                .replace("{1}", users[i]["mail"].length == 0 ? "" : "<" + users[i]["mail"] + ">")
-                .replace("{2}", "Sökväg: " + users[i]["distinguishedName"]
+                .html(template.replace("{0}", m_users[i]["name"])
+                .replace("{1}", m_users[i]["mail"].length == 0 ? "" : "<" + m_users[i]["mail"] + ">")
+                .replace("{2}", "Sökväg: " + m_users[i]["distinguishedName"]
                                     .replace(",OU=Kommuner,OU=Upcor,DC=safe4,DC=se", "")
                                     .replace(/[,]?[A-Z]+=/g, "/"))));
+        }
+    }
+
+    function guiSetGroups(data) {
+        /* new user, don't exist in sharepoint */
+        if (data.ints.length == 0) {
+            if (data.errs[0].length > 0) {
+                $('button.btn-save').attr('update', 'false');
+            } else {
+                $('button.btn-save').attr('update', 'true');
+            }
+        }
+        for (var i = 0; i < data.ints.length; i++) {
+            console.log("value: " + data.ints[i]);
+            $('input[type="checkbox"][value="{id}"]'.replace("{id}", data.ints[i])).prop('checked', true);
         }
     }
 });
