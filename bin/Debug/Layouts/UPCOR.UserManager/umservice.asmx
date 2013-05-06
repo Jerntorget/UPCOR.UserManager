@@ -69,7 +69,7 @@ namespace UPCOR.UserManager
             ResponseData rd = new ResponseData();
             string err1, err2;
             AdUserManager adum = new AdUserManager(countyName, orgName);
-            adum.Create(webUrl, "SAFE4", String.IsNullOrEmpty(orgName) ? countyName : orgName, userName, password, givenName, surName, email, groupIds, out err1);
+            adum.Create(webUrl, "SAFE4", String.IsNullOrEmpty(orgName) ? "" : orgName, userName, password, givenName, surName, email, groupIds, out err1);
             adum.AddToGroups(webUrl, "SAFE4", userName, groupIds, out err2);
             rd.errs = new string[] { err1, err2 };
             return rd;

@@ -12,54 +12,55 @@
 
 <asp:Panel CssClass="um-panel" runat="server">
     <div class="um-user-manager">
-        <p>
+        <div>
             <!-- store info here -->
             <asp:Label CssClass="um-store" ID="idStore" runat="server"></asp:Label>
             <!-- Error info -->
             <asp:Label CssClass="um-error" ID="idErrorText" runat="server"></asp:Label>
-        </p>
-        <p>
+        </div>
+        <div>
             <asp:Label ID="idLblOrganization" AssociatedControlID="idOrganization" runat="server" Text="Välj organisation:"></asp:Label>
             <asp:DropDownList ID="idOrganization" runat="server" CssClass="um-organization"></asp:DropDownList>
-        </p>
-        <p>
+        </div>
+        <div>
             <asp:Label ID="idLblGiveName" AssociatedControlID="idGivenName" runat="server" Text="Förnamn:"></asp:Label>
             <asp:TextBox ID="idGivenName" runat="server" CssClass="um-givenname" MaxLength="50"></asp:TextBox>
-        </p>
-        <p>
+        </div>
+        <div>
             <asp:Label ID="idLblSurName" AssociatedControlID="idSurName" runat="server" Text="Efternamn:"></asp:Label>
             <asp:TextBox ID="idSurName" runat="server" CssClass="um-surname" MaxLength="50"></asp:TextBox>
-        </p>
-        <p>
+        </div>
+        <div>
             <asp:Label ID="idLblEmail" AssociatedControlID="idEmail" runat="server" Text="E-post:"></asp:Label>
             <asp:TextBox ID="idEmail" runat="server" CssClass="um-email" MaxLength="50"></asp:TextBox>
-        </p>
-        <p>
+        </div>
+        <div>
             <asp:Label ID="idLblUsername" AssociatedControlID="idUsername" runat="server" Text="Användarnamn:"></asp:Label>
             <asp:TextBox ID="idUsername" runat="server" CssClass="um-username" MaxLength="20"></asp:TextBox>
-        </p>
-        <p>
+        </div>
+        <div>
             <asp:Label ID="idLblPassword1" AssociatedControlID="idPassword1" runat="server" Text="Lösenord:"></asp:Label>
             <asp:TextBox ID="idPassword1" runat="server" TextMode="Password" CssClass="um-password1" MaxLength="20"></asp:TextBox>
-        </p>
-        <p>
+        </div>
+        <div>
             <asp:Label ID="idLblPassword2" AssociatedControlID="idPassword2" runat="server" Text="Bekräfta lösenord:"></asp:Label>
             <asp:TextBox ID="idPassword2" runat="server" TextMode="Password" CssClass="um-password2" MaxLength="20"></asp:TextBox>
-        </p>
-        <p>
+        </div>
+        <div>
             <asp:Label ID="idLblSendto" AssociatedControlID="idSendto" runat="server" Text="Skickas till:"></asp:Label>
             <asp:TextBox ID="idSendto" runat="server" CssClass="um-sendto" MaxLength="50"></asp:TextBox>
-        </p>
-        <div> <!-- siteGroups -->
+        </div>
+        <div>
+            <!-- siteGroups -->
             <h3>Lägg till användaren i grupperna:</h3>
             <div class="um-sitegroups">
                 <asp:CheckBoxList ID="idSiteGroups" runat="server"></asp:CheckBoxList>
             </div>
         </div>
-        <p>
+        <div>
             <button id="idBtnSave" class="um-btnsave">Spara</button>
             <button id="idBtnCancel" class="um-btncancel">Börja om</button>
-        </p>
+        </div>
     </div>
     <div class="um-search-result">
         <h2>Liknande användare</h2>

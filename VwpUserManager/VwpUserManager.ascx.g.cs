@@ -338,8 +338,8 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             @__ctrl.ApplyStyleSheetSkin(this.Page);
             @__ctrl.CssClass = "um-panel";
             System.Web.UI.IParserAccessor @__parser = ((System.Web.UI.IParserAccessor)(@__ctrl));
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n    <div class=\"um-user-manager\">\r\n        <p>\r\n            <!-- store info her" +
-                        "e -->\r\n            "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n    <div class=\"um-user-manager\">\r\n        <div>\r\n            <!-- store info h" +
+                        "ere -->\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl1;
             @__ctrl1 = this.@__BuildControlidStore();
             @__parser.AddParsedSubObject(@__ctrl1);
@@ -347,7 +347,7 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             global::System.Web.UI.WebControls.Label @__ctrl2;
             @__ctrl2 = this.@__BuildControlidErrorText();
             @__parser.AddParsedSubObject(@__ctrl2);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </div>\r\n        <div>\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl3;
             @__ctrl3 = this.@__BuildControlidLblOrganization();
             @__parser.AddParsedSubObject(@__ctrl3);
@@ -355,7 +355,7 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             global::System.Web.UI.WebControls.DropDownList @__ctrl4;
             @__ctrl4 = this.@__BuildControlidOrganization();
             @__parser.AddParsedSubObject(@__ctrl4);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </div>\r\n        <div>\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl5;
             @__ctrl5 = this.@__BuildControlidLblGiveName();
             @__parser.AddParsedSubObject(@__ctrl5);
@@ -363,7 +363,7 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             global::System.Web.UI.WebControls.TextBox @__ctrl6;
             @__ctrl6 = this.@__BuildControlidGivenName();
             @__parser.AddParsedSubObject(@__ctrl6);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </div>\r\n        <div>\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl7;
             @__ctrl7 = this.@__BuildControlidLblSurName();
             @__parser.AddParsedSubObject(@__ctrl7);
@@ -371,7 +371,7 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             global::System.Web.UI.WebControls.TextBox @__ctrl8;
             @__ctrl8 = this.@__BuildControlidSurName();
             @__parser.AddParsedSubObject(@__ctrl8);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </div>\r\n        <div>\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl9;
             @__ctrl9 = this.@__BuildControlidLblEmail();
             @__parser.AddParsedSubObject(@__ctrl9);
@@ -379,7 +379,7 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             global::System.Web.UI.WebControls.TextBox @__ctrl10;
             @__ctrl10 = this.@__BuildControlidEmail();
             @__parser.AddParsedSubObject(@__ctrl10);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </div>\r\n        <div>\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl11;
             @__ctrl11 = this.@__BuildControlidLblUsername();
             @__parser.AddParsedSubObject(@__ctrl11);
@@ -387,7 +387,7 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             global::System.Web.UI.WebControls.TextBox @__ctrl12;
             @__ctrl12 = this.@__BuildControlidUsername();
             @__parser.AddParsedSubObject(@__ctrl12);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </div>\r\n        <div>\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl13;
             @__ctrl13 = this.@__BuildControlidLblPassword1();
             @__parser.AddParsedSubObject(@__ctrl13);
@@ -395,7 +395,7 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             global::System.Web.UI.WebControls.TextBox @__ctrl14;
             @__ctrl14 = this.@__BuildControlidPassword1();
             @__parser.AddParsedSubObject(@__ctrl14);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </div>\r\n        <div>\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl15;
             @__ctrl15 = this.@__BuildControlidLblPassword2();
             @__parser.AddParsedSubObject(@__ctrl15);
@@ -403,7 +403,7 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             global::System.Web.UI.WebControls.TextBox @__ctrl16;
             @__ctrl16 = this.@__BuildControlidPassword2();
             @__parser.AddParsedSubObject(@__ctrl16);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <p>\r\n            "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </div>\r\n        <div>\r\n            "));
             global::System.Web.UI.WebControls.Label @__ctrl17;
             @__ctrl17 = this.@__BuildControlidLblSendto();
             @__parser.AddParsedSubObject(@__ctrl17);
@@ -411,19 +411,19 @@ namespace UPCOR.UserManager.UserManagerWebPart {
             global::System.Web.UI.WebControls.TextBox @__ctrl18;
             @__ctrl18 = this.@__BuildControlidSendto();
             @__parser.AddParsedSubObject(@__ctrl18);
-            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </p>\r\n        <div> <!-- siteGroups -->\r\n            <h3>Lägg till anvä" +
-                        "ndaren i grupperna:</h3>\r\n            <div class=\"um-sitegroups\">\r\n             " +
-                        "   "));
+            @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl("\r\n        </div>\r\n        <div>\r\n            <!-- siteGroups -->\r\n            <h3" +
+                        ">Lägg till användaren i grupperna:</h3>\r\n            <div class=\"um-sitegroups\">" +
+                        "\r\n                "));
             global::System.Web.UI.WebControls.CheckBoxList @__ctrl19;
             @__ctrl19 = this.@__BuildControlidSiteGroups();
             @__parser.AddParsedSubObject(@__ctrl19);
             @__parser.AddParsedSubObject(new System.Web.UI.LiteralControl(@"
             </div>
         </div>
-        <p>
+        <div>
             <button id=""idBtnSave"" class=""um-btnsave"">Spara</button>
             <button id=""idBtnCancel"" class=""um-btncancel"">Börja om</button>
-        </p>
+        </div>
     </div>
     <div class=""um-search-result"">
         <h2>Liknande användare</h2>
