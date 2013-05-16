@@ -102,6 +102,7 @@
         }
         if (!validate(getf("givenname"), "Kan inte spara, förnamn saknas.")) return false;
         if (!validate(getf("surname"), "Kan inte spara, efternamn saknas.")) return false;
+        if (!validate(getf("email"), "Kan inte spara, mailadress saknas.")) return false;
 
         var b = $(this);
         /* validate passwords */
@@ -128,8 +129,8 @@
             "sendTo": encodeURIComponent($.trim(getf("sendto").val()))
         };
 
-        var opt = $('select.um-organization options:selected');
-        if (opt.val() != 0) {
+        var opt = $('select.um-organization option:selected');
+        if (opt.val() != "0") {
             data.orgName = opt.text();
         }
 
@@ -139,15 +140,18 @@
             var delGroupIds = [];
             $('.um-sitegroups input[type="checkbox"]').each(function () {
                 var o = $(this);
-                if (o.prop('checked'))
+                if (o.prop('checked')) {
                     addGroupIds.push(o.val());
-                else
-                    delGroupIds.push(o.val());
+                } else {
+                    if(o.attr('ingroup') == "true")
+                        delGroupIds.push(o.val());
+                }
             });
             data.addGroupIds = addGroupIds;
             data.delGroupIds = delGroupIds;
             fnUmService("Update", data, function (res) {
-                console.log("res: " + res);
+                guiShowMessage("Användaren: " + data.givenName + " " + data.surName + " updaterad.");
+                guiClear();
             });
         } else {
             /* new user */
@@ -158,7 +162,8 @@
             });
             data.groupIds = groupIds;
             fnUmService("Create", data, function (res) {
-                console.log("res: " + res);
+                guiShowMessage("Användaren: " + data.givenName + " " + data.surName + " skapad.");
+                guiClear();
             });
         }
         console.log(data);
@@ -175,14 +180,31 @@
         return false;
     });
 
+    function guiShowMessage(msg) {
+        var div = $('div class').css({
+            "position": "relative",
+            "padding": "10px",
+            "border": "1px solid #444",
+            "background-color": "ccc"
+        }).text(msg);
+        $('div.um-panel').append(div);
+        div.delay(1000).fadeOut('slow', function () {
+            div.remove();
+        });
+    }
+
     function guiClear() {
         getf("givenname").val("");
         getf("surname").val("");
         getf("username").val("").prop('disabled', false);
         getf("email").val("");
+        getf("password1").val("");
+        getf("password2").val("");
         $('div.um-sitegroups input[type="checkbox"]').prop('checked', false);
         $('button.um-btnsave').attr('update', 'false');
         $('.um-sitegroups input[type="checkbox"]').prop('checked', false);
+        error("");
+        $('div.um-search-result div').empty();
     };
 
     /*
@@ -246,12 +268,14 @@
                 .click(function () {
                     var a = $(this);
                     var u = m_users[a.attr("uid")];
+                    guiClear();
                     getf("givenname").val(u["givenName"]);
                     getf("surname").val(u["sn"]);
                     getf("username").val(u["sAMAccountName"]).prop('disabled', true);
                     getf("email").val(u["mail"]);
                     $('button.um-btnsave').attr('update', 'true');
                     fnUserGroups(u["sAMAccountName"], guiSetGroups);
+                    m_canSave = true;
                 })
                 .attr("uid", i)
                 .html(template.replace("{0}", m_users[i]["name"])
@@ -273,7 +297,7 @@
         }
         for (var i = 0; i < data.ints.length; i++) {
             console.log("value: " + data.ints[i]);
-            $('.um-sitegroups input[type="checkbox"][value="{id}"]'.replace("{id}", data.ints[i])).prop('checked', true);
+            $('.um-sitegroups input[type="checkbox"][value="{id}"]'.replace("{id}", data.ints[i])).prop('checked', true).attr('ingroup', 'true');
         }
     }
 });

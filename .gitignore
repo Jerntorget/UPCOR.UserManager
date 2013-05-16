@@ -1,4 +1,4 @@
-*.dll*
-*.pdb
-*.wsp
-
+**.dll*
+**.pdb
+**.wsp
+obj/*

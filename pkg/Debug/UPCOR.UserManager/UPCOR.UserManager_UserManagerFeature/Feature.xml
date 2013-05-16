@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="UPCOR.UserManager Feature1" Description="My Visual Web Part Feature" Id="4ed519e7-b9c0-4b46-bed9-1484339695a9" Scope="Site">
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Description="My Visual Web Part Feature" Id="4ed519e7-b9c0-4b46-bed9-1484339695a9" Scope="Site" Title="UPCOR.UserManager Feature1">
   <ElementManifests>
     <ElementManifest Location="VwpUserManager\Elements.xml" />
     <ElementFile Location="VwpUserManager\VwpUserManager.webpart" />
