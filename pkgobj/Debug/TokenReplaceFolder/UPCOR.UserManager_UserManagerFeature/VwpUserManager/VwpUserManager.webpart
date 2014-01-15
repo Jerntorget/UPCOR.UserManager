@@ -2,7 +2,7 @@
 <webParts>
   <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
     <metaData>
-      <type name="UPCOR.UserManager.UserManagerWebPart.UserManagerWebPart, UPCOR.UserManager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=88adaf4f384e4a8e" />
+      <type name="UPCOR.UserManager.UserManagerWebPart.UserManagerWebPart, UPCOR.UserManager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f66bbd75f013e009" />
       <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
     </metaData>
     <data>

@@ -2,11 +2,15 @@
     /*
     * Initialize data
     **/
+    var m_regex = /[#,+"\/<>;\n\r=]+/g; // regex for AD distinguished name
     var m_store = $('span.um-store');
     var m_countyName = m_store.attr('county_name');
     var m_webUrl = m_store.attr('weburl');
     var m_canSave = false;
     var m_user = {};
+
+    var m_nums = "0123456789";
+    var m_chars = "abcdefghijklmnopqrstuvwxyz";
 
     if (m_countyName == "") {
         $('div.um-panel').css('display', 'none')
@@ -44,7 +48,7 @@
     function fnUmService(method, data, success, error) {
         data["webUrl"] = encodeURIComponent(m_webUrl);
         data["countyName"] = encodeURIComponent(m_countyName);
-        data["orgName"] = data.orgName == null ? "" : encodeURIComponent(data.orgName);
+        data["orgName"] = data.orgName == null ? "" : encodeURIComponent(data.orgName.replace(m_regex, ""));
         $.ajax({
             type: "POST",
             url: "/_layouts/15/upcor.usermanager/umservice.asmx/" + method,
@@ -53,17 +57,24 @@
             data: JSON.stringify(data),
             dataType: "json",
             success: function (data, status) {
-                console.log(data);
-                console.log(status);
                 if (typeof success === 'function')
                     success(data.d, status);
             },
             error: function (xmlRequest) {
-                console.log(xmlRequest);
                 if (typeof error === 'function')
                     error(xmlRequest);
             }
         });
+    }
+
+    function fnSendMail(to, subject, body, success, error) {
+        fnUmService("SendMail", {
+            "to": to,
+            "subject": subject,
+            "body": body
+        },
+        success,
+        error);
     }
 
     function fnSearch(filter, success, error) {
@@ -95,6 +106,7 @@
     **/
     $('button.um-btnsave').click(function (e) {
         e.preventDefault();
+        guiShowLoader();
         /* validate fields */
         if (!m_canSave) {
             error("Kan inte spara...");
@@ -126,7 +138,6 @@
             "password": encodeURIComponent(pw2),
             "userName": encodeURIComponent($.trim(getf("username").val())),
             "email": encodeURIComponent($.trim(getf("email").val())),
-            "sendTo": encodeURIComponent($.trim(getf("sendto").val()))
         };
 
         var opt = $('select.um-organization option:selected');
@@ -143,14 +154,27 @@
                 if (o.prop('checked')) {
                     addGroupIds.push(o.val());
                 } else {
-                    if(o.attr('ingroup') == "true")
+                    if (o.attr('ingroup') == "true")
                         delGroupIds.push(o.val());
                 }
             });
             data.addGroupIds = addGroupIds;
             data.delGroupIds = delGroupIds;
             fnUmService("Update", data, function (res) {
-                guiShowMessage("Användaren: " + data.givenName + " " + data.surName + " updaterad.");
+                guiShowMessage("Användaren: " + $.trim(getf("givenname").val()) + " " + $.trim(getf("surname").val()) + " updaterad.");
+                fnSendMail($.trim(getf("sendto").val()),
+                    encodeURIComponent("Din användare på skolan.it har blivit uppdaterad"),
+                    encodeURIComponent("Hej " +
+                                        $.trim(getf("givenname").val()) + " " + $.trim(getf("surname").val()) + ",\r\n\r\n" +
+                                        "Din användare har blivit uppdaterad." +
+                                        "\r\nLösenord: \"" + pw2 + "\"." +
+                                        "\r\n\r\nMVH www.skolan.it <support@skolan.it>"),
+                    function (data) {
+                        guiShowMessage("Meddelande skickat till " + to + ".");
+                    },
+                    function (err) {
+                        guiHideLoader();
+                    });
                 guiClear();
             });
         } else {
@@ -162,12 +186,28 @@
             });
             data.groupIds = groupIds;
             fnUmService("Create", data, function (res) {
-                guiShowMessage("Användaren: " + data.givenName + " " + data.surName + " skapad.");
+                console.log(res);
+                var to = $.trim(getf("sendto").val());
+                guiShowMessage("Användaren: " + $.trim(getf("givenname").val()) + " " + $.trim(getf("surname").val()) + " sparad.");
+                if (to.length > 0) {
+                    fnSendMail(to,
+                        encodeURIComponent("En användare har skapats på skolan.it"),
+                        encodeURIComponent("Hej " +
+                                            $.trim(getf("givenname").val()) + " " + $.trim(getf("surname").val()) + ",\r\n\r\n" +
+                                            "En användare med användarnamnet: \"SAFE4\\" + $.trim(getf("username").val()) + "\"" +
+                                            "\r\nhar skapats med lösenordet: \"" + pw2 + "\"." +
+                                            "\r\n\r\nMVH www.skolan.it <support@skolan.it>"),
+                        function (data) {
+                            guiShowMessage("Meddelande skickat till " + to + ".");
+                        },
+                        function (err) {
+                            guiHideLoader();
+                        });
+                }
+                guiHideLoader();
                 guiClear();
             });
         }
-        console.log(data);
-
         return false;
     });
 
@@ -180,17 +220,47 @@
         return false;
     });
 
+    /*
+    * EVENT: Select
+    **/
+    $('select.um-organization').change(function () {
+        var opt = $('select.um-organization option:selected');
+        var name = opt.val().replace("-","");
+        getf("givenname").val(name);
+        getf("surname").val(opt.text().replace(m_regex, ""));
+        getf("username").val(name);
+        getf("email").val(name + "@safe4.se");
+        var password = "";
+        for (var i = 0; i < 3; i++) {
+            password += m_chars.substr(Math.floor(Math.random() * m_chars.length), 1);
+        }
+        for (var i = 0; i < 3; i++) {
+            password += m_nums.substr(Math.floor(Math.random() * m_nums.length), 1);
+        }
+        getf("password1").val(password);
+        getf("password2").val(password);
+
+        $('label:contains("' + opt.val() + '")').prev().prop('checked', true);
+        $('label:contains("Besökare på '+ m_countyName + '")').prev().prop('checked', true);
+        m_canSave = true;
+    });
+
     function guiShowMessage(msg) {
-        var div = $('div class').css({
-            "position": "relative",
-            "padding": "10px",
-            "border": "1px solid #444",
-            "background-color": "ccc"
-        }).text(msg);
-        $('div.um-panel').append(div);
-        div.delay(1000).fadeOut('slow', function () {
+        var div = $('<div class="um-message">').text(msg);
+        $('div.um-notif').prepend(div);
+        div.delay(2000).fadeOut('slow', function () {
             div.remove();
         });
+    }
+
+    function guiShowLoader() {
+        //    "/_layouts/15/upcor.usermanager/style.css"
+        var div = $('<div class="um-loader">').append($('<img>').attr('src', '/_layouts/15/upcor.usermanager/gif-load.gif'));
+        $('div.um-notif').prepend(div);
+    }
+
+    function guiHideLoader() {
+        $('div.um-loader').remove();
     }
 
     function guiClear() {
@@ -200,11 +270,13 @@
         getf("email").val("");
         getf("password1").val("");
         getf("password2").val("");
+        getf("sendto").val("");
         $('div.um-sitegroups input[type="checkbox"]').prop('checked', false);
         $('button.um-btnsave').attr('update', 'false');
         $('.um-sitegroups input[type="checkbox"]').prop('checked', false);
         error("");
         $('div.um-search-result div').empty();
+        guiHideLoader();
     };
 
     /*
@@ -226,6 +298,13 @@
             function (data, success) {
                 guiDisplayUsers(data);
             });
+    });
+
+    /*
+    * EVENT: email
+    **/
+    $('input.um-email').blur(function () {
+        $('input.um-sendto').val($(this).val());
     });
 
     /*
@@ -258,7 +337,6 @@
     * GUI: Gui functions
     **/
     function guiDisplayUsers(rd) {
-        console.log("rd", rd);
         var template = '<span class="um-col-name"=>{0}</span><span class="um-col-mail>{1}</span><span class="um-col-path">{2}</span>';
         var div = $('div.um-search-result div').empty();
         m_users = rd.dicts;
@@ -296,7 +374,6 @@
             }
         }
         for (var i = 0; i < data.ints.length; i++) {
-            console.log("value: " + data.ints[i]);
             $('.um-sitegroups input[type="checkbox"][value="{id}"]'.replace("{id}", data.ints[i])).prop('checked', true).attr('ingroup', 'true');
         }
     }

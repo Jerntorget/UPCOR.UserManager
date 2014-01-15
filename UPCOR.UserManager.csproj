@@ -38,7 +38,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>UPCOR.System\jtkey2010.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.SharePoint.Client, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
@@ -80,6 +80,7 @@
     <None Include="Layouts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{eb3ecdaf-40a4-451a-95a7-3c7a7716b6f0}</SharePointProjectItemId>
     </None>
+    <None Include="UPCOR.System\jtkey2010.pfx" />
     <None Include="VwpUserManager\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{cd255341-3550-4d93-b546-cef9da0c1cec}</SharePointProjectItemId>
     </None>
@@ -88,6 +89,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Layouts\UPCOR.UserManager\code.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Layouts\UPCOR.UserManager\gif-load.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Layouts\UPCOR.UserManager\style.css">

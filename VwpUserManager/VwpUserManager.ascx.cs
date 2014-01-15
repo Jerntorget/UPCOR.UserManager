@@ -103,7 +103,7 @@ namespace UPCOR.UserManager.UserManagerWebPart
             if (this.WebUrlToUse != null && this.ListName != null && this.ColumnOrganizationId != null && this.ColumnOrganizationName != null) {
                 var attrs = new string[][] {
                     new string[] { "weburl", this.WebUrlToUse },
-                    new string[] { "county_name", HttpUtility.UrlKeyValueEncode(String.IsNullOrEmpty(this.CountyName) ? "" : this.CountyName) },
+                    new string[] { "county_name", this.CountyName },
                 };
 
                 /*

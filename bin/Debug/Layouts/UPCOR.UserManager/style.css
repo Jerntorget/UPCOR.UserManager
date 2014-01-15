@@ -4,8 +4,12 @@
 }
 
 div.um-panel select {
-    width: 175px;
+    width: 275px;
     border: 1px solid rgb(146, 192, 224);
+}
+
+div.um-panel input[type="text"] {
+    width: 275px;
 }
 
 div.um-panel span.um-error {
@@ -39,9 +43,9 @@ a.um-user-item {
         padding: 2px;
     }
 
-    a.um-user-item span.um-col-name {
-        font-weight: bold;
-    }
+        a.um-user-item span.um-col-name {
+            font-weight: bold;
+        }
 
 div.um-sitegroups {
     width: 400px;
@@ -53,3 +57,13 @@ div.um-sitegroups {
     div.um-sitegroups label {
         white-space: nowrap;
     }
+
+div.um-notif {
+    position: absolute;
+}
+div.um-message {
+    padding: 20px;
+    border: 1px solid #444;
+    color: #fff;
+    background-color: #999;
+}

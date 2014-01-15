@@ -11,6 +11,7 @@
 <SharePoint:ScriptLink ID="umScript" runat="server" LoadAfterUI="true" Name="/_layouts/15/upcor.usermanager/code.js"></SharePoint:ScriptLink>
 
 <asp:Panel CssClass="um-panel" runat="server">
+    <div class="um-notif"></div>
     <div class="um-user-manager">
         <div>
             <!-- store info here -->
@@ -40,11 +41,11 @@
         </div>
         <div>
             <asp:Label ID="idLblPassword1" AssociatedControlID="idPassword1" runat="server" Text="Lösenord:"></asp:Label>
-            <asp:TextBox ID="idPassword1" runat="server" TextMode="Password" CssClass="um-password1" MaxLength="20"></asp:TextBox>
+            <asp:TextBox ID="idPassword1" runat="server" CssClass="um-password1" MaxLength="20"></asp:TextBox>
         </div>
         <div>
             <asp:Label ID="idLblPassword2" AssociatedControlID="idPassword2" runat="server" Text="Bekräfta lösenord:"></asp:Label>
-            <asp:TextBox ID="idPassword2" runat="server" TextMode="Password" CssClass="um-password2" MaxLength="20"></asp:TextBox>
+            <asp:TextBox ID="idPassword2" runat="server" CssClass="um-password2" MaxLength="20"></asp:TextBox>
         </div>
         <div>
             <asp:Label ID="idLblSendto" AssociatedControlID="idSendto" runat="server" Text="Skickas till:"></asp:Label>

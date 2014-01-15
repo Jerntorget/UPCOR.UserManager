@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Services;
@@ -20,7 +21,7 @@ namespace UPCOR.UserManager
     public struct ResponseData
     {
         public string[] errs;
-        public Dictionary<string, string>[] dicts;
+        public KeyValuePair<string, string>[] dicts;
         public int[] ints;
         public bool boolVal;
     }
@@ -66,6 +67,12 @@ namespace UPCOR.UserManager
             email = HttpUtility.UrlKeyValueDecode(email);
             webUrl = HttpUtility.UrlKeyValueDecode(webUrl);
 
+            string file = @"C:\Temp\umservice.log";
+            string log = String.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8}", "SKAPAD", DateTime.Now.ToShortDateString(), countyName, orgName, userName, password, givenName, surName, email);
+            StreamWriter sw = new StreamWriter(file, true);
+            sw.WriteLine(log);
+            sw.Close();                
+            
             ResponseData rd = new ResponseData();
             string err1, err2;
             AdUserManager adum = new AdUserManager(countyName, orgName);
@@ -87,6 +94,12 @@ namespace UPCOR.UserManager
             email = HttpUtility.UrlKeyValueDecode(email);
             webUrl = HttpUtility.UrlKeyValueDecode(webUrl);
 
+            string file = @"C:\Temp\umservice.log";
+            string log = String.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8}", "UPPDATERAD", DateTime.Now.ToShortDateString(), countyName, orgName, userName, password, givenName, surName, email);
+            StreamWriter sw = new StreamWriter(file, true);
+            sw.WriteLine(log);
+            sw.Close();                           
+            
             ResponseData rd = new ResponseData();
             string err1, err2, err3;            
             AdUserManager adum = new AdUserManager(countyName, orgName);
@@ -95,6 +108,15 @@ namespace UPCOR.UserManager
             adum.RemoveFromGroups(webUrl, "SAFE4", userName, delGroupIds, out err3);
             rd.errs = new string[] { err1, err2, err3 };
             return rd;
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void SendMail(string to, string subject, string body){
+            to = HttpUtility.UrlKeyValueDecode(to);
+            subject = HttpUtility.UrlKeyValueDecode(subject);
+            body = HttpUtility.UrlKeyValueDecode(body);
+            Support.SendMail(to, subject, body);
         }
 
         [WebMethod]
