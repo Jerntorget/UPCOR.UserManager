@@ -23,6 +23,7 @@
             <asp:Label ID="idLblOrganization" AssociatedControlID="idOrganization" runat="server" Text="Välj organisation:"></asp:Label>
             <asp:DropDownList ID="idOrganization" runat="server" CssClass="um-organization"></asp:DropDownList>
         </div>
+        <div><a href="#" id="idBtnAuto">Skapa användaruppgifter</a></div>
         <div>
             <asp:Label ID="idLblGiveName" AssociatedControlID="idGivenName" runat="server" Text="Förnamn:"></asp:Label>
             <asp:TextBox ID="idGivenName" runat="server" CssClass="um-givenname" MaxLength="50"></asp:TextBox>
@@ -48,8 +49,12 @@
             <asp:TextBox ID="idPassword2" runat="server" CssClass="um-password2" MaxLength="20"></asp:TextBox>
         </div>
         <div>
-            <asp:Label ID="idLblSendto" AssociatedControlID="idSendto" runat="server" Text="Skickas till:"></asp:Label>
+            <asp:Label ID="idLblSendto" AssociatedControlID="idSendto" runat="server" Text="Skicka e-post till:"></asp:Label>
             <asp:TextBox ID="idSendto" runat="server" CssClass="um-sendto" MaxLength="50"></asp:TextBox>
+        </div>
+        <div>
+            <button id="idBtnSave" class="um-btnsave">Spara</button>
+            <button id="idBtnCancel" class="um-btncancel">Börja om</button>
         </div>
         <div>
             <!-- siteGroups -->
@@ -58,13 +63,9 @@
                 <asp:CheckBoxList ID="idSiteGroups" runat="server"></asp:CheckBoxList>
             </div>
         </div>
-        <div>
-            <button id="idBtnSave" class="um-btnsave">Spara</button>
-            <button id="idBtnCancel" class="um-btncancel">Börja om</button>
-        </div>
     </div>
     <div class="um-search-result">
-        <h2>Liknande användare</h2>
+        <h2>Användare</h2>
         <div></div>
     </div>
     <div style="clear: both;"></div>

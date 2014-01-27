@@ -77,9 +77,10 @@
         error);
     }
 
-    function fnSearch(filter, success, error) {
+    function fnSearch(filter, orgName, success, error) {
         fnUmService("Search", {
-            "filter": filter
+            "filter": filter,
+            "orgName": orgName
         },
         success,
         error);
@@ -194,9 +195,16 @@
                         encodeURIComponent("En användare har skapats på skolan.it"),
                         encodeURIComponent("Hej " +
                                             $.trim(getf("givenname").val()) + " " + $.trim(getf("surname").val()) + ",\r\n\r\n" +
-                                            "En användare med användarnamnet: \"SAFE4\\" + $.trim(getf("username").val()) + "\"" +
-                                            "\r\nhar skapats med lösenordet: \"" + pw2 + "\"." +
-                                            "\r\n\r\nMVH www.skolan.it <support@skolan.it>"),
+                                            "Välkommen till tillsynen.se!\r\n" +
+                                            "Tillsynen.se är en portal för dig som säljer tobak eller folköl.\r\n" +
+                                            "Portalen tillhandahålls som en service från din kommun.\r\n\r\n" +
+                                            "Via tillsynen.se får du tillgång till ditt företags information\r\n" +
+                                            "om försäljning av tobak och folköl.\r\n\r\n" +
+                                            "Användaruppgifter:\r\n" +
+                                            "Användarnamn: \"SAFE4\\" + $.trim(getf("username").val()) + "\"" +
+                                            "\r\nLösenord: \"" + pw2 + "\".\r\n\r\n" +
+                                            "Surfa till http://www.tillsynen.se för att logga in." +
+                                            "\r\n\r\nMed vänliga hälsningar\r\n www.skolan.it <support@skolan.it>"),
                         function (data) {
                             guiShowMessage("Meddelande skickat till " + to + ".");
                         },
@@ -223,9 +231,9 @@
     /*
     * EVENT: Select
     **/
-    $('select.um-organization').change(function () {
+    $('#idBtnAuto').click(function (e) {
         var opt = $('select.um-organization option:selected');
-        var name = opt.val().replace("-","");
+        var name = opt.val().replace("-", "");
         getf("givenname").val(name);
         getf("surname").val(opt.text().replace(m_regex, ""));
         getf("username").val(name);
@@ -241,8 +249,23 @@
         getf("password2").val(password);
 
         $('label:contains("' + opt.val() + '")').prev().prop('checked', true);
-        $('label:contains("Besökare på '+ m_countyName + '")').prev().prop('checked', true);
+        $('label:contains("Besökare på ' + m_countyName + '")').prev().prop('checked', true);
         m_canSave = true;
+        e.preventDefault();
+        return false;
+    });
+
+    $('select.um-organization').change(function () {
+        guiClear();
+        var orgName = "";
+        var opt = $('select.um-organization option:selected');
+        if (opt.val() != "0") {
+            orgName = opt.text();
+        }
+        fnSearch("sAMAccountName=*", orgName,
+             function (data, success) {
+                 guiDisplayUsers(data);
+             });
     });
 
     function guiShowMessage(msg) {
@@ -337,30 +360,44 @@
     * GUI: Gui functions
     **/
     function guiDisplayUsers(rd) {
-        var template = '<span class="um-col-name"=>{0}</span><span class="um-col-mail>{1}</span><span class="um-col-path">{2}</span>';
+        var template = '<span class="um-col-name"=>{0}</span><span class="um-col-mail>{1}</span>';
         var div = $('div.um-search-result div').empty();
         m_users = rd.dicts;
+        var users = [];
+        var user = {};
         for (var i = 0; i < m_users.length; i++) {
+            var u = m_users[i];
+            var key = u["Key"];
+            var val = u["Value"];
+            user[key] = val;
+            if (key == "distinguishedName") {
+                users.push(user);
+                user = {};
+            }
+
+        }
+        for (var i = 0; i < users.length; i++) {
+            var u = users[i];
             div.append(
                 $('<a href="#" class="um-user-item"></a>')
                 .click(function () {
                     var a = $(this);
-                    var u = m_users[a.attr("uid")];
                     guiClear();
-                    getf("givenname").val(u["givenName"]);
-                    getf("surname").val(u["sn"]);
-                    getf("username").val(u["sAMAccountName"]).prop('disabled', true);
-                    getf("email").val(u["mail"]);
+                    getf("givenname").val(a.attr("givenName"));
+                    getf("surname").val(a.attr("sn"));
+                    getf("username").val(a.attr("sAMAccountName")).prop('disabled', true);
+                    getf("email").val(a.attr("mail"));
                     $('button.um-btnsave').attr('update', 'true');
-                    fnUserGroups(u["sAMAccountName"], guiSetGroups);
+                    fnUserGroups(a.attr("sAMAccountName"), guiSetGroups);
                     m_canSave = true;
                 })
                 .attr("uid", i)
-                .html(template.replace("{0}", m_users[i]["name"])
-                .replace("{1}", m_users[i]["mail"].length == 0 ? "" : "<" + m_users[i]["mail"] + ">")
-                .replace("{2}", "Sökväg: " + m_users[i]["distinguishedName"]
-                                    .replace(",OU=Kommuner,OU=Upcor,DC=safe4,DC=se", "")
-                                    .replace(/[,]?[A-Z]+=/g, "/"))));
+                .attr("givenName", u["givenName"])
+                .attr("sn", u["sn"])
+                .attr("sAMAccountName", u["sAMAccountName"])
+                .attr("mail", u["mail"])
+                .html(template.replace("{0}", u["name"])
+                .replace("{1}", !u["mail"] ? "" : "<" + u["mail"] + ">")));
         }
     }
 

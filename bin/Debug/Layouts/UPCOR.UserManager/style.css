@@ -21,11 +21,11 @@ div.um-panel div.um-user-manager {
 }
 
 div.um-panel div.um-search-result {
-    float: left;
+    float: right;
     margin-left: 20px;
-    width: 600px;
+    width: 400px;
     height: 400px;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 span.um-error {
