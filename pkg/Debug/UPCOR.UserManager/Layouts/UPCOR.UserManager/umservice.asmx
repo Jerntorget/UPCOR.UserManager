@@ -103,7 +103,7 @@ namespace UPCOR.UserManager
             ResponseData rd = new ResponseData();
             string err1, err2, err3;            
             AdUserManager adum = new AdUserManager(countyName, orgName);
-            adum.Update(userName, password, givenName, surName, email, out err1);
+            adum.Update(webUrl, userName, password, givenName, surName, email, out err1);
             adum.AddToGroups(webUrl, "SAFE4", userName, addGroupIds, out err2);
             adum.RemoveFromGroups(webUrl, "SAFE4", userName, delGroupIds, out err3);
             rd.errs = new string[] { err1, err2, err3 };

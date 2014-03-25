@@ -204,7 +204,7 @@
                                             "Användarnamn: \"SAFE4\\" + $.trim(getf("username").val()) + "\"" +
                                             "\r\nLösenord: \"" + pw2 + "\".\r\n\r\n" +
                                             "Surfa till http://www.tillsynen.se för att logga in." +
-                                            "\r\n\r\nMed vänliga hälsningar\r\n www.skolan.it <support@skolan.it>"),
+                                            "\r\n\r\nMed vänliga hälsningar\r\n www.tillsynen.se <support@tillsynen.se>"),
                         function (data) {
                             guiShowMessage("Meddelande skickat till " + to + ".");
                         },
