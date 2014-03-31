@@ -168,8 +168,10 @@
                     encodeURIComponent("Hej " +
                                         $.trim(getf("givenname").val()) + " " + $.trim(getf("surname").val()) + ",\r\n\r\n" +
                                         "Din användare har blivit uppdaterad." +
+                                        "Användaruppgifter:\r\n" +
+                                        "Användarnamn: \"SAFE4\\" + $.trim(getf("username").val()) + "\"" +
                                         "\r\nLösenord: \"" + pw2 + "\"." +
-                                        "\r\n\r\nMVH www.skolan.it <support@skolan.it>"),
+                                        "\r\n\r\nMVH www.tillsynen.se <support@tillsynen.se>"),
                     function (data) {
                         guiShowMessage("Meddelande skickat till " + to + ".");
                     },
@@ -187,7 +189,6 @@
             });
             data.groupIds = groupIds;
             fnUmService("Create", data, function (res) {
-                console.log(res);
                 var to = $.trim(getf("sendto").val());
                 guiShowMessage("Användaren: " + $.trim(getf("givenname").val()) + " " + $.trim(getf("surname").val()) + " sparad.");
                 if (to.length > 0) {

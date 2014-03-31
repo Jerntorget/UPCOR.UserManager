@@ -99,7 +99,6 @@
     </Content>
     <Content Include="Layouts\UPCOR.UserManager\umservice.asmx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Component</SubType>
     </Content>
     <Content Include="VwpUserManager\VwpUserManager.ascx">
       <Generator>SharePointWebPartCodeGenerator</Generator>
