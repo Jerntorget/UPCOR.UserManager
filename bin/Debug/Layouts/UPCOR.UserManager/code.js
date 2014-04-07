@@ -167,11 +167,11 @@
                     encodeURIComponent("Din användare på skolan.it har blivit uppdaterad"),
                     encodeURIComponent("Hej " +
                                         $.trim(getf("givenname").val()) + " " + $.trim(getf("surname").val()) + ",\r\n\r\n" +
-                                        "Din användare har blivit uppdaterad." +
+                                        "Din användare har blivit uppdaterad.\r\n" +
                                         "Användaruppgifter:\r\n" +
                                         "Användarnamn: \"SAFE4\\" + $.trim(getf("username").val()) + "\"" +
                                         "\r\nLösenord: \"" + pw2 + "\"." +
-                                        "\r\n\r\nMVH www.tillsynen.se <support@tillsynen.se>"),
+                                        "\r\n\r\nMed vänliga hälsningar\r\nwww.tillsynen.se <support@tillsynen.se>"),
                     function (data) {
                         guiShowMessage("Meddelande skickat till " + to + ".");
                     },

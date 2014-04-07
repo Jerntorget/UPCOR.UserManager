@@ -125,8 +125,11 @@ namespace UPCOR.UserManager.UserManagerWebPart
                         g => g.Title,
                         g => g.Id));
                 context.Load(web, w => w.Title);
-                context.ExecuteQuery();
-
+                try {
+                    context.ExecuteQuery();
+                }
+                catch (Exception ex) { 
+                }
                 /*
                  * Populate siteGroups
                  * */
